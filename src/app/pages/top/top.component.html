@@ -1,0 +1,62 @@
+<div fxLayout="row wrap">
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px">calendar_today</mat-icon>
+        時刻表
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <h3 matLine>全線時刻表</h3>
+          <p>
+            <a mat-list-item href="./RealTimeOperation">平日ダイヤ</a>
+            <a mat-list-item href="./RealTimeOperation">土休日ダイヤ</a>
+          </p>
+        </mat-nav-list>
+        <mat-nav-list>
+          <h3 matLine>駅指定時刻表</h3>
+          <mat-radio-group>
+            <mat-radio-button value="1">平日</mat-radio-button>&nbsp;
+            <mat-radio-button value="2">土休日</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-form-field>
+            <mat-select placeholder="駅名" [(value)]="selected">
+              <mat-option *ngFor="let station of stations" [value]="station.id">
+                {{station.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px">train</mat-icon>
+        運用情報
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item href="./RealTimeOperation">リアルタイム運用情報</a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px ">tune</mat-icon>
+        運用表
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item href="./RealTimeOperation">リアルタイム運用情報</a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+Debug:<br> {{selected}}
