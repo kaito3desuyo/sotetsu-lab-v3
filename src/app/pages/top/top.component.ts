@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Station } from '../../classes/station';
 import { StationService } from '../../services/station.service';
@@ -10,13 +11,33 @@ import { StationService } from '../../services/station.service';
 })
 export class TopComponent implements OnInit {
     stations: Station[];
+    searchTimetable: {
+        day: string
+        direction: string
+        station: string
+    } = {
+        day: null,
+        direction: null,
+        station: null
+    };
+    selected = false;
 
-    constructor(private stationService: StationService) {}
+    constructor(
+        private stationService: StationService,
+        private router: Router
+    ) {}
 
     getStations(): void {
         this.stationService
             .getStations()
             .subscribe(stations => (this.stations = stations));
+    }
+
+    test() {
+        if (!this.selected) {
+            this.searchTimetable.station = 'station';
+        }
+        this.router.navigate(['/Timetable', this.searchTimetable]);
     }
 
     ngOnInit() {

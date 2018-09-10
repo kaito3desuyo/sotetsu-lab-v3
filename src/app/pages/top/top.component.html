@@ -7,27 +7,30 @@
       </mat-card-title>
       <mat-card-content>
         <mat-nav-list>
-          <h3 matLine>全線時刻表</h3>
-          <p>
-            <a mat-list-item href="./RealTimeOperation">平日ダイヤ</a>
-            <a mat-list-item href="./RealTimeOperation">土休日ダイヤ</a>
-          </p>
-        </mat-nav-list>
-        <mat-nav-list>
-          <h3 matLine>駅指定時刻表</h3>
-          <mat-radio-group>
-            <mat-radio-button value="1">平日</mat-radio-button>&nbsp;
-            <mat-radio-button value="2">土休日</mat-radio-button>
+          <mat-radio-group [(ngModel)]="searchTimetable.day">
+            <mat-label>日付&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="weekday">平日</mat-radio-button>&nbsp;
+            <mat-radio-button value="holiday">土休日</mat-radio-button>
           </mat-radio-group>
           <br><br>
+          <mat-radio-group [(ngModel)]="searchTimetable.direction">
+            <mat-label>方向&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="up">上り</mat-radio-button>&nbsp;
+            <mat-radio-button value="down">下り</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-slide-toggle style="margin:8px;" [(ngModel)]="selected">駅を指定して検索する</mat-slide-toggle>
+          <br>
           <mat-form-field>
-            <mat-select placeholder="駅名" [(value)]="selected">
+            <mat-label>駅名</mat-label>
+            <mat-select [(value)]="searchTimetable.station" [disabled]="!selected">
               <mat-option *ngFor="let station of stations" [value]="station.id">
-                {{station.name}}
+                {{station.stationName}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </mat-nav-list>
+        <button mat-stroked-button (click)="test()">検索</button>
       </mat-card-content>
     </mat-card>
   </div>
@@ -52,11 +55,19 @@
       </mat-card-title>
       <mat-card-content>
         <mat-nav-list>
-          <a mat-list-item href="./RealTimeOperation">リアルタイム運用情報</a>
+          <mat-radio-group [(ngModel)]="searchTimetable.day">
+            <mat-label>日付&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="weekday">平日</mat-radio-button>&nbsp;
+            <mat-radio-button value="holiday">土休日</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="運用番号" [(ngModel)]="Sushi">
+          </mat-form-field>
         </mat-nav-list>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
-Debug:<br> {{selected}}
+Debug:<br> {{Sushi}}
