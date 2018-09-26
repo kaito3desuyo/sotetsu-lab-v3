@@ -1,0 +1,73 @@
+<div fxLayout="row wrap">
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px">calendar_today</mat-icon>
+        時刻表
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <mat-radio-group [(ngModel)]="searchTimetable.day">
+            <mat-label>日付&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="weekday">平日</mat-radio-button>&nbsp;
+            <mat-radio-button value="holiday">土休日</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-radio-group [(ngModel)]="searchTimetable.direction">
+            <mat-label>方向&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="up">上り</mat-radio-button>&nbsp;
+            <mat-radio-button value="down">下り</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-slide-toggle style="margin:8px;" [(ngModel)]="selected">駅を指定して検索する</mat-slide-toggle>
+          <br>
+          <mat-form-field>
+            <mat-label>駅名</mat-label>
+            <mat-select [(value)]="searchTimetable.station" [disabled]="!selected">
+              <mat-option *ngFor="let station of stations" [value]="station.id">
+                {{station.stationName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-nav-list>
+        <button mat-stroked-button (click)="test()">検索</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px">train</mat-icon>
+        運用情報
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item href="./RealTimeOperation">リアルタイム運用情報</a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.sm="50" fxFlex.xs="100">
+    <mat-card role="navigation">
+      <mat-card-title>
+        <mat-icon style="position: relative; top: 4px ">tune</mat-icon>
+        運用表
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <mat-radio-group [(ngModel)]="searchOperationTable.day">
+            <mat-label>日付&nbsp;&nbsp;</mat-label>
+            <mat-radio-button value="weekday">平日</mat-radio-button>&nbsp;
+            <mat-radio-button value="holiday">土休日</mat-radio-button>
+          </mat-radio-group>
+          <br><br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="運用番号" [(ngModel)]="searchOperationTable.operationNumber">
+          </mat-form-field>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+Debug:<br> {{searchOperationTable.operationNumber}}
