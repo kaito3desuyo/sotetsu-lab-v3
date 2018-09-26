@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     Station.associate = function(models) {
         // associations can be defined here
         Station.belongsTo(models.Route, { foreignKey: "routeId" })
+        Station.hasMany(models.Stop, { foreignKey: "stationId" })
     }
     return Station
 }

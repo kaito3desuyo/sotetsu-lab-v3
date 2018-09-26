@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     )
     Route.associate = function(models) {
         // associations can be defined here
+        Route.belongsToMany(models.Service, { through: "LineSystem" })
         Route.hasMany(models.Station, { foreignKey: "routeId" })
     }
     return Route
