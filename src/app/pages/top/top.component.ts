@@ -16,9 +16,16 @@ export class TopComponent implements OnInit {
         direction: string
         station: string
     } = {
-        day: null,
-        direction: null,
+        day: 'weekday',
+        direction: 'up',
         station: null
+    };
+    searchOperationTable: {
+        day: string
+        operationNumber: number
+    } = {
+        day: 'weekday',
+        operationNumber: null
     };
     selected = false;
 

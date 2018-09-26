@@ -55,14 +55,14 @@
       </mat-card-title>
       <mat-card-content>
         <mat-nav-list>
-          <mat-radio-group [(ngModel)]="searchTimetable.day">
+          <mat-radio-group [(ngModel)]="searchOperationTable.day">
             <mat-label>日付&nbsp;&nbsp;</mat-label>
             <mat-radio-button value="weekday">平日</mat-radio-button>&nbsp;
             <mat-radio-button value="holiday">土休日</mat-radio-button>
           </mat-radio-group>
           <br><br>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="運用番号" [(ngModel)]="Sushi">
+            <input matInput placeholder="運用番号" [(ngModel)]="searchOperationTable.operationNumber">
           </mat-form-field>
         </mat-nav-list>
       </mat-card-content>
@@ -70,4 +70,4 @@
   </div>
 </div>
 
-Debug:<br> {{Sushi}}
+Debug:<br> {{searchOperationTable.operationNumber}}
