@@ -27,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TopComponent } from './pages/top/top.component';
+import { TimetableComponent } from './pages/timetable/timetable.component';
 
 @Injectable()
 class UIErrorHandler extends ErrorHandler {
@@ -41,7 +42,7 @@ class UIErrorHandler extends ErrorHandler {
 }
 
 @NgModule({
-    declarations: [AppComponent, TopComponent],
+    declarations: [AppComponent, TopComponent, TimetableComponent],
     imports: [
         ErrorsModule,
         BrowserModule,

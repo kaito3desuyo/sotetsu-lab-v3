@@ -4,10 +4,17 @@ const router = express.Router()
 const db = require("../../models/index")
 
 router.get("/", (req, res) => {
+    console.log(db.Station.associations.Stops)
     db.Station.findAll({
         order: [
             [db.Station.associations.Route, "sortOrder", "ASC"],
-            ["sortOrder", "ASC"]
+            ["sortOrder", "ASC"],
+            [
+                db.Station.associations.Stops,
+                db.Stop.associations.Times,
+                "departureTime",
+                "ASC"
+            ]
         ],
         include: [
             {
@@ -16,7 +23,27 @@ router.get("/", (req, res) => {
             },
             {
                 model: db.Stop,
-                required: true
+                required: true,
+                include: [
+                    {
+                        model: db.Time,
+                        required: true,
+                        include: {
+                            model: db.Trip,
+                            required: true,
+                            where: {
+                                tripDirectionId: 1 //上下線選択
+                            },
+                            include: {
+                                model: db.Calender,
+                                required: true,
+                                where: {
+                                    calenderName: "土休日" //曜日選択
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         ]
     }).then(result => {
