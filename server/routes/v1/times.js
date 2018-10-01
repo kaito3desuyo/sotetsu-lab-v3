@@ -59,6 +59,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -77,6 +78,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -95,6 +97,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -109,6 +112,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -135,6 +139,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -153,6 +158,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -171,6 +177,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -185,6 +192,7 @@ router.get("/mock", (req, res) => {
                                     // console.log(`${str}=>${num[str]}`)
                                     output.push({
                                         tripId: result.id,
+                                        stationId: stationchecker(str),
                                         stopId: stopchecker(str),
                                         stopSequence: count,
                                         pickupType: 0,
@@ -274,5 +282,62 @@ function stopchecker(str) {
             return "dea41ea6-734b-43f3-a89e-c62639ca6bd8"
         case "SO41":
             return "e76a2da5-6d53-4621-9eec-50d7515f5a67"
+    }
+}
+
+function stationchecker(str) {
+    switch (str) {
+        case "SO01":
+            return "04afe3da-26a5-42a2-8d5e-8ae034cf734f"
+        case "SO02":
+            return "b7317532-4703-404a-8059-83d9d11c1fb4"
+        case "SO03":
+            return "d921b60e-e7aa-4ff0-b04f-4dd9af4bae6a"
+        case "SO04":
+            return "18cf54f1-5614-49f3-9f43-be145a6ef5a7"
+        case "SO05":
+            return "0a2ad5b9-00e3-4130-a0d8-11453dd5cf95"
+        case "SO06":
+            return "f0eec974-0c3c-4291-93d7-77ff526e3cea"
+        case "SO07":
+            return "d3d05815-0b84-4069-a4fa-63d1aee9a125"
+        case "SO08":
+            return "38ba87df-7ead-43e1-ba20-95521339216c"
+        case "SO09":
+            return "16bfe90a-935a-4332-9897-e65d29393a21"
+        case "SO10":
+            return "37a0bddb-959d-4a8e-80e2-71fff53836a2"
+        case "SO11":
+            return "ccc4bece-d04f-4815-9ba5-06a883e5a2a2"
+        case "SO12":
+            return "8227cc83-fb55-41e8-a48b-a3e41fe1feb7"
+        case "SO13":
+            return "34b7b5fa-c3ea-4c2b-94bf-f8acc271af07"
+        case "SO14":
+            return "d75e1e65-9948-40d4-a38b-dda49557f17f"
+        case "SO15":
+            return "a919da84-e609-4984-961d-13bc394ac280"
+        case "SO16":
+            return "a102b9a6-b03e-46bb-a2df-63282501085e"
+        case "SO17":
+            return "b90be173-f4da-49a2-9622-05bbe61af884"
+        case "SO18":
+            return "c759a566-535f-46fa-9192-72e64b7a4882"
+        case "SO31":
+            return "d7a1be6c-82ad-4576-9a19-a33398e409e6"
+        case "SO32":
+            return "5e4633e2-fe9c-4182-918b-aad0f71fee84"
+        case "SO33":
+            return "4179988a-4e8f-48b9-a9a4-d7ab294e7605"
+        case "SO34":
+            return "5ba6bffd-8264-4305-8957-e9e67d06d08e"
+        case "SO35":
+            return "5679d547-ba3a-4d72-9bb4-59e265a624b8"
+        case "SO36":
+            return "09f056c2-5ad2-4054-b419-61f91478f35c"
+        case "SO37":
+            return "f07d9508-d08e-4aae-a1e3-d81b9443840a"
+        case "SO41":
+            return "f3d5f94a-2166-4c71-89a8-b1f496a5ea51"
     }
 }

@@ -10,6 +10,9 @@ module.exports = {
             tripId: {
                 type: Sequelize.UUID
             },
+            stationId: {
+                type: Sequelize.UUID
+            },
             stopId: {
                 type: Sequelize.UUID
             },

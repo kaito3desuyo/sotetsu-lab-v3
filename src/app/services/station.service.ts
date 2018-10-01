@@ -14,7 +14,11 @@ export class StationService {
 
     private Url = 'http://localhost:3000/api/v1/stations';
 
-    getStations(): Observable<Station[]> {
-        return this.http.get<Station[]>(this.Url);
+    getStations(direction: string): Observable<Station[]> {
+        return this.http.get<Station[]>(this.Url, {
+            params: {
+                direction: direction
+            }
+        });
     }
 }

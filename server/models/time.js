@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4
             },
             tripId: DataTypes.UUID,
+            stationId: DataTypes.UUID,
             stopId: DataTypes.UUID,
             stopSequence: DataTypes.INTEGER,
             pickupType: DataTypes.INTEGER,
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
         Time.belongsTo(models.Trip, { foreignKey: "tripId" })
         Time.belongsTo(models.Stop, { foreignKey: "stopId" })
+        Time.belongsTo(models.Station, { foreignKey: "stationId" })
     }
     return Time
 }

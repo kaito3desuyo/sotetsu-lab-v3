@@ -4,17 +4,16 @@ const router = express.Router()
 const db = require("../../models/index")
 
 router.get("/", (req, res) => {
-    console.log(db.Station.associations.Stops)
+    console.log(req.query.direction)
+    // 駅情報の取得
+
+    const params = {
+        direction: req.query.direction
+    }
     db.Station.findAll({
         order: [
-            [db.Station.associations.Route, "sortOrder", "ASC"],
-            ["sortOrder", "ASC"],
-            [
-                db.Station.associations.Stops,
-                db.Stop.associations.Times,
-                "departureTime",
-                "ASC"
-            ]
+            ["sortOrder", params.direction === "down" ? "ASC" : "DESC"],
+            [db.Station.associations.Times, "departureTime", "ASC"]
         ],
         include: [
             {
@@ -22,28 +21,26 @@ router.get("/", (req, res) => {
                 required: true
             },
             {
-                model: db.Stop,
+                model: db.Time,
                 required: true,
-                include: [
-                    {
-                        model: db.Time,
+                include: {
+                    model: db.Trip,
+                    required: true,
+                    where: {
+                        tripDirectionId: 1 //上下線選択
+                    },
+                    include: {
+                        model: db.Calender,
                         required: true,
-                        include: {
-                            model: db.Trip,
-                            required: true,
-                            where: {
-                                tripDirectionId: 1 //上下線選択
-                            },
-                            include: {
-                                model: db.Calender,
-                                required: true,
-                                where: {
-                                    calenderName: "土休日" //曜日選択
-                                }
-                            }
+                        where: {
+                            calenderName: "土休日" //曜日選択
                         }
                     }
-                ]
+                }
+            },
+            {
+                model: db.Stop,
+                required: true
             }
         ]
     }).then(result => {

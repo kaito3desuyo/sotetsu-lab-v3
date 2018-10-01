@@ -3,16 +3,70 @@ const router = express.Router()
 
 const db = require("../../models")
 
+const Sequelize = require("sequelize")
+const Op = Sequelize.Op
+
 router.get("/", (req, res, next) => {
+    // 列車取得
+    const params = {
+        dia: req.query.dia,
+        day: req.query.day,
+        direction: req.query.direction,
+        start: req.query.start,
+        max: req.query.max
+    }
+
+    const output = []
     db.Trip.findAll({
+        where: {
+            tripDirectionId: params.direction === "up" ? 0 : 1
+        },
         include: [
             {
                 model: db.Time,
-                required: true
+                required: true,
+                include: [
+                    {
+                        model: db.Stop,
+                        required: true,
+                        include: [
+                            {
+                                model: db.Station,
+                                required: true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                model: db.Calender,
+                required: true,
+                where: {
+                    calenderName: params.day === "weekday" ? "平日" : "土休日",
+                    startDate: "2017-03-18"
+                }
+            },
+            {
+                model: db.TripClass,
+                required: false
             }
+        ],
+        order: [
+            [db.Trip.associations.Times, "stopSequence", "ASC"],
+            [db.Trip.associations.Times, "departureTime", "ASC"]
         ]
     }).then(result => {
-        res.json(result)
+        if (!params.start || !params.max) {
+            for (const data of result) {
+                output.push(data)
+            }
+        } else {
+            for (let i = params.start; i < params.max; i++) {
+                output.push(result[i])
+            }
+        }
+
+        res.json(output)
     })
 })
 
