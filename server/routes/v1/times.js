@@ -23,7 +23,9 @@ router.get("/", (req, res, next) => {
 })
 
 router.get("/mock", (req, res) => {
-    req.connection.setTimeout(1500000000)
+    req.connection.setTimeout(
+        150000000000000000000000000000000000000000000000000000000
+    )
     const data = require("./../../mock-data/operation_table_20170318.json")
     const exec = []
     const output = []
@@ -35,14 +37,14 @@ router.get("/mock", (req, res) => {
                     tripNumber: num.train_id,
                     calenderId:
                         num.day === "weekday"
-                            ? "ec3a5a6b-5b1a-4986-8e9c-0b6aa24b2e45"
-                            : "4d6d9208-7dec-4670-8e2e-a82d24f4c5a4"
+                            ? "65c733b5-3996-481f-8c5b-e503bf3c708a"
+                            : "4cbfa40a-91e7-4fd5-8373-77b2b72d2e01"
                 }
             }).then(results => {
                 for (const result of results) {
                     if (
                         result.serviceId ===
-                        "bbfee27b-36cf-4754-90ed-711adf882964"
+                        "c50a2afc-5e30-450a-b030-f9e66c4dec35"
                     ) {
                         let count = 0
                         if (result.tripDirectionId === 0) {
@@ -231,113 +233,113 @@ module.exports = router
 function stopchecker(str) {
     switch (str) {
         case "SO01":
-            return "2476f3d5-f0f9-45f0-931d-51a806a5ddcc"
+            return "17d19e51-b027-496e-9693-7c2c2692864a"
         case "SO02":
-            return "cf5f0208-65fa-4dd6-8356-4142b5d40f0c"
+            return "0b6bbce1-4f03-45ae-9686-2dda32797bde"
         case "SO03":
-            return "f9800e20-32fb-4ec5-af60-4f61f8c6afdd"
+            return "ca7cb87d-d8aa-40cd-a9f0-3acf695682be"
         case "SO04":
-            return "a11a615f-f5c1-40bd-9ac9-8f52ad1b958f"
+            return "0a8f9d72-1160-4fe9-9721-b3109874fda1"
         case "SO05":
-            return "9f60fa62-bccf-4968-9b7f-7ab92c21cab3"
+            return "d1b51663-adc5-4866-8815-529904e84f00"
         case "SO06":
-            return "2d91c2a3-c9ca-4ba9-abf0-3e29d7f1ba11"
+            return "5da62c7d-f799-4c6f-badb-3bfcf614fe71"
         case "SO07":
-            return "6a4d58be-52a2-4cfb-8cf4-87bd190128b2"
+            return "87b51c11-3a07-4a80-91e2-b7ffcaaa14a1"
         case "SO08":
-            return "517355fe-9ca0-4f5e-aaa7-aebb21a18889"
+            return "362bbf05-eff0-4628-9384-dbc425b95692"
         case "SO09":
-            return "7e8435cc-af85-4d5c-b82f-076290967832"
+            return "8f4aa2de-aff7-4d0a-a888-d340c6bb60db"
         case "SO10":
-            return "effacec9-fe42-40b0-b214-3e080c2170f3"
+            return "d131408b-2330-437f-a241-3dccdb8d9620"
         case "SO11":
-            return "87e8eb2b-8d76-406e-b16b-48c7d88ffbef"
+            return "91304a94-5cdb-404a-8bc9-d62e1df72a94"
         case "SO12":
-            return "c5cf3e04-f6d5-46fc-8c0c-724a1f57563a"
+            return "8d3d8b61-9a41-4ad3-93a3-ce6bdb9e0130"
         case "SO13":
-            return "3b6fcf46-6143-4f92-971a-90a26d5b080d"
+            return "67732676-12c9-43c7-90fe-f01027c21a88"
         case "SO14":
-            return "a9db5ffa-021f-44a6-8188-fc369810d23e"
+            return "75567194-d116-438d-b554-ea8ee2101a47"
         case "SO15":
-            return "a7f9ecc1-14f7-471f-8097-21d613f93a5b"
+            return "56c3fccc-d345-4477-9db0-653c8673ef81"
         case "SO16":
-            return "97823292-ca85-4719-8fef-dc1280b7e82a"
+            return "074cde38-d1fb-4bf3-b613-9e7c63a29a2f"
         case "SO17":
-            return "fb6e262e-326a-47a4-bd27-946c224223ea"
+            return "46eee1d2-138f-48a8-b31e-6227c11e3e88"
         case "SO18":
-            return "1c3af72a-d842-4310-b497-93541d0e58f3"
+            return "ef798431-3966-4f84-898c-f1c4298a1de5"
         case "SO31":
-            return "f3507729-643b-45a8-a66c-d7e36e139ac6"
+            return "5ccd4e40-3472-4b12-92d2-c6b517b1da99"
         case "SO32":
-            return "92e4b666-c6d8-4ad1-8870-6bf19a3721d4"
+            return "b33bb4a6-97cd-4c9e-ae64-e0f2f92f924e"
         case "SO33":
-            return "bb6ef8b7-52b6-426b-9d56-d7e5e56f0df4"
+            return "d055ac9c-255d-47e5-be60-be5dd0f684fc"
         case "SO34":
-            return "8b3ee684-c572-48de-a967-6e17f5925794"
+            return "40787c40-84d1-4b44-841e-30b448e5da95"
         case "SO35":
-            return "b4d91c22-5fba-4659-aa2c-612f05a407b8"
+            return "dfc46b9c-8456-4253-b5dc-8fae1b5ecd5d"
         case "SO36":
-            return "36d96a19-bdcc-44bc-90b3-6320915e25a6"
+            return "5ea738bb-7b0d-4ae2-9d3c-f8d52a68fbab"
         case "SO37":
-            return "dea41ea6-734b-43f3-a89e-c62639ca6bd8"
+            return "3c779edd-0e4e-4723-9395-5ec1062ed623"
         case "SO41":
-            return "e76a2da5-6d53-4621-9eec-50d7515f5a67"
+            return "af8b7a78-fc37-4402-8082-bbd2f7be0168"
     }
 }
 
 function stationchecker(str) {
     switch (str) {
         case "SO01":
-            return "04afe3da-26a5-42a2-8d5e-8ae034cf734f"
+            return "b25757b8-b68f-4454-9349-38519acf9273"
         case "SO02":
-            return "b7317532-4703-404a-8059-83d9d11c1fb4"
+            return "1da7db48-1a45-4834-9d42-3b7efd8a517c"
         case "SO03":
-            return "d921b60e-e7aa-4ff0-b04f-4dd9af4bae6a"
+            return "f003f7fc-83f3-4bfd-b48f-f06f3603db59"
         case "SO04":
-            return "18cf54f1-5614-49f3-9f43-be145a6ef5a7"
+            return "4aedf169-536f-431b-b170-529eaf99ba02"
         case "SO05":
-            return "0a2ad5b9-00e3-4130-a0d8-11453dd5cf95"
+            return "c9978334-bb8f-403b-be36-9480aaefa7b0"
         case "SO06":
-            return "f0eec974-0c3c-4291-93d7-77ff526e3cea"
+            return "4b973f6d-b59f-4b9b-9b22-3428ee31e9c3"
         case "SO07":
-            return "d3d05815-0b84-4069-a4fa-63d1aee9a125"
+            return "835edc58-ff72-4095-99fa-01f1fee70830"
         case "SO08":
-            return "38ba87df-7ead-43e1-ba20-95521339216c"
+            return "c3637f6f-045d-4d3c-af68-b2c413a7754e"
         case "SO09":
-            return "16bfe90a-935a-4332-9897-e65d29393a21"
+            return "0a4e8a84-9ca4-4098-af6b-d6ce32e56fdf"
         case "SO10":
-            return "37a0bddb-959d-4a8e-80e2-71fff53836a2"
+            return "f064ab35-a3cd-4007-9d02-f823206de63f"
         case "SO11":
-            return "ccc4bece-d04f-4815-9ba5-06a883e5a2a2"
+            return "e7fea0cd-a8c6-4e89-b1f6-0feec731162c"
         case "SO12":
-            return "8227cc83-fb55-41e8-a48b-a3e41fe1feb7"
+            return "0fd50022-93ef-4d24-871c-d7ea3471e133"
         case "SO13":
-            return "34b7b5fa-c3ea-4c2b-94bf-f8acc271af07"
+            return "8d833a01-e5f0-4821-a789-b1d5b3ffdcbd"
         case "SO14":
-            return "d75e1e65-9948-40d4-a38b-dda49557f17f"
+            return "6603048e-5119-4f67-a528-9bb7b285496b"
         case "SO15":
-            return "a919da84-e609-4984-961d-13bc394ac280"
+            return "cee419e6-5c6f-4fa5-a070-fb93ebab0255"
         case "SO16":
-            return "a102b9a6-b03e-46bb-a2df-63282501085e"
+            return "9a1b6a71-bdcb-46b5-94e2-36ef7625a7bf"
         case "SO17":
-            return "b90be173-f4da-49a2-9622-05bbe61af884"
+            return "1061684a-235d-4bd7-b24c-6015c1ace0bc"
         case "SO18":
-            return "c759a566-535f-46fa-9192-72e64b7a4882"
+            return "d34e2bf8-ef31-4a7b-96ec-4844d8c8135e"
         case "SO31":
-            return "d7a1be6c-82ad-4576-9a19-a33398e409e6"
+            return "61008030-3e1f-42b3-aa1d-c242b220d170"
         case "SO32":
-            return "5e4633e2-fe9c-4182-918b-aad0f71fee84"
+            return "9fe83c63-bfcb-43b4-820e-98290543fea6"
         case "SO33":
-            return "4179988a-4e8f-48b9-a9a4-d7ab294e7605"
+            return "217e404b-4d92-4550-83cb-64f89aa0e0ad"
         case "SO34":
-            return "5ba6bffd-8264-4305-8957-e9e67d06d08e"
+            return "e1bff868-1786-4aa1-9efc-720614491657"
         case "SO35":
-            return "5679d547-ba3a-4d72-9bb4-59e265a624b8"
+            return "6960fcf8-adb7-43eb-9b3a-ee529501f7fe"
         case "SO36":
-            return "09f056c2-5ad2-4054-b419-61f91478f35c"
+            return "7595fc58-bae8-49df-bdc7-3dd061d6f597"
         case "SO37":
-            return "f07d9508-d08e-4aae-a1e3-d81b9443840a"
+            return "7ee1b666-9859-4a41-bc67-6a429dd64c8a"
         case "SO41":
-            return "f3d5f94a-2166-4c71-89a8-b1f496a5ea51"
+            return "01b403a8-c165-40f4-8f73-9a923f6cbb2a"
     }
 }

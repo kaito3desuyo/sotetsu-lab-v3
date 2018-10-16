@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Station } from '../classes/station';
-import { STATIONS } from '../mocks/stations';
 
 @Injectable({
     providedIn: 'root'
@@ -12,12 +11,14 @@ import { STATIONS } from '../mocks/stations';
 export class StationService {
     constructor(private http: HttpClient) {}
 
-    private Url = 'http://localhost:3000/api/v1/stations';
+    private Url = 'http://localhost:3000/api/v1/stations/test';
 
-    getStations(direction: string): Observable<Station[]> {
+    getStations(direction: string, sortColumn: string): Observable<Station[]> {
         return this.http.get<Station[]>(this.Url, {
             params: {
-                direction: direction
+                direction: direction,
+                'include[Route][status]': 'true',
+                'order[]': ['Station.Route.sortOrder,ASC', 'Station.sortOrder,ASC']
             }
         });
     }

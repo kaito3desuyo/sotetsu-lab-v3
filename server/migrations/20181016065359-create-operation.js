@@ -1,7 +1,7 @@
 "use strict"
 module.exports = {
     up: (queryInterface, Sequelize) =>
-        queryInterface.createTable("Trips", {
+        queryInterface.createTable("Operations", {
             id: {
                 allowNull: false,
                 primaryKey: true,
@@ -10,29 +10,14 @@ module.exports = {
             serviceId: {
                 type: Sequelize.UUID
             },
-            operationId: {
-                type: Sequelize.UUID
-            },
-            tripNumber: {
-                type: Sequelize.STRING
-            },
-            tripClassId: {
-                type: Sequelize.UUID
-            },
-            tripName: {
-                type: Sequelize.STRING
-            },
-            tripDirectionId: {
-                type: Sequelize.INTEGER
-            },
-            blockId: {
-                type: Sequelize.STRING
-            },
             calenderId: {
                 type: Sequelize.UUID
             },
-            extraCalenderId: {
-                type: Sequelize.UUID
+            operationNumber: {
+                type: Sequelize.STRING
+            },
+            tripSequence: {
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,
@@ -43,5 +28,5 @@ module.exports = {
                 type: Sequelize.DATE
             }
         }),
-    down: (queryInterface, Sequelize) => queryInterface.dropTable("Trips")
+    down: (queryInterface, Sequelize) => queryInterface.dropTable("Operations")
 }

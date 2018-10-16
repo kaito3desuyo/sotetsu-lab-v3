@@ -41,22 +41,33 @@ export class Station {
                 extraCalenderId: string
                 createdAt: string
                 updatedAt: string
+                Calender: {
+                    id: string
+                    calenderName: string
+                    sunday: boolean
+                    monday: boolean
+                    tuesday: boolean
+                    wednesday: boolean
+                    thursday: boolean
+                    friday: boolean
+                    saturday: boolean
+                    startDate: string
+                    endDate: string
+                    createdAt: string
+                    updatedAt: string
+                }
             }
-            Calender: {
-                id: string
-                calenderName: string
-                sunday: boolean
-                monday: boolean
-                tuesday: boolean
-                wednesday: boolean
-                thursday: boolean
-                friday: boolean
-                saturday: boolean
-                startDate: string
-                endDate: string
-                createdAt: string
-                updatedAt: string
-            }
+            
         }
     ];
+    Stops: [
+        {
+            id: string
+            stationId: string
+            stopName:string
+            stopDescription: string
+            createdAt: string
+            updatedAt: string
+        }
+    ]
 }

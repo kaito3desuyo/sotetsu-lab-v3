@@ -17,7 +17,8 @@ module.exports = {
                 type: Sequelize.UUID
             },
             stopSequence: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                unique: true
             },
             pickupType: {
                 type: Sequelize.INTEGER

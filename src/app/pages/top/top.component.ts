@@ -37,7 +37,7 @@ export class TopComponent implements OnInit {
 
     getStations(): void {
         this.stationService
-            .getStations()
+            .getStations('down', 'stationNumbering')
             .subscribe(stations => (this.stations = stations));
     }
 

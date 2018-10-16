@@ -1,0 +1,13 @@
+<p>
+  timetable-by-station works!
+  {{overTimeCheck(0, '15:03:00')}}
+</p>
+<table class="border">
+  <tr *ngFor="let time of times" style="border-top:1px solid #888">
+    <th class="border">{{time.hour}}時</th>
+    <td class="border" *ngFor="let train of time.trains" [style.color]="train.Trip.TripClass.tripClassColor" [style.background-color]="overTimeCheck(train.departureDays, train.departureTime)">
+      {{train.departureTime ? convertTime(train.departureTime, 'mm') : null}}{{train.Trip.Times[train.Trip.Times.length - 1].Station.stationName.substr(0, 1)}}<br>
+      {{train.Trip.Operation ? train.Trip.Operation.operationNumber + '運' : '不明'}}
+    </td>
+  </tr>
+</table>
