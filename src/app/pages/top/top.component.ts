@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Station } from '../../classes/station';
 import { StationService } from '../../services/station.service';
@@ -31,19 +31,17 @@ export class TopComponent implements OnInit {
 
     constructor(
         private stationService: StationService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     getStations(): void {
         this.stationService
-            .getStations()
+            .getStations('down', 'stationNumbering')
             .subscribe(stations => (this.stations = stations));
     }
 
     test() {
-        if (!this.selected) {
-            this.searchTimetable.station = 'station';
-        }
         this.router.navigate(['/Timetable', this.searchTimetable]);
     }
 

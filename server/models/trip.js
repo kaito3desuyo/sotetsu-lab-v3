@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4
             },
             serviceId: DataTypes.UUID,
+            operationId: DataTypes.UUID,
             tripNumber: DataTypes.STRING,
             tripClassId: DataTypes.UUID,
             tripName: DataTypes.STRING,
@@ -25,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         Trip.belongsTo(models.Calender, { foreignKey: "calenderId" })
         Trip.hasMany(models.Time, { foreignKey: "tripId" })
         Trip.belongsTo(models.TripClass, { foreignKey: "tripClassId" })
+        Trip.belongsTo(models.Operation, { foreignKey: "operationId" })
     }
     return Trip
 }

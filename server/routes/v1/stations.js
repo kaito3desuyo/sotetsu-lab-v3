@@ -3,16 +3,200 @@ const router = express.Router()
 
 const db = require("../../models/index")
 
+router.get("/test", (req, res) => {
+    console.log(req.query.order)
+    //オーダー部
+    const orders = []
+    if (req.query.order) {
+        for (const order of req.query.order) {
+            const separatedOrder = order.split(",")
+
+            const secondSeparatedOrder = separatedOrder[0].split(".")
+
+            const secondOrders = []
+            for (const str of secondSeparatedOrder) {
+                switch (str) {
+                    case "Station":
+                        break
+                    case "Route":
+                        secondOrders.push(db.Station.associations.Route)
+                        break
+                    case "Time":
+                        secondOrders.push(db.Station.associations.Times)
+                        break
+                    case "Trip":
+                        secondOrders.push(db.Time.associations.Trip)
+                        break
+                    case "Calender":
+                        secondOrders.push(db.Trip.associations.Calender)
+                        break
+                    case "Operation":
+                        secondOrders.push(db.Trip.associations.Operation)
+                        break
+                    case "TripTimes":
+                        secondOrders.push(db.Trip.associations.Times)
+                        break
+                    case "Stop":
+                        secondOrders.push(db.Station.associations.Stops)
+                        break
+                }
+            }
+            secondOrders.push(
+                secondSeparatedOrder[secondSeparatedOrder.length - 1],
+                separatedOrder[1]
+            )
+            orders.push(secondOrders)
+        }
+        console.log(orders)
+    }
+
+    //アソシエーション部
+    const includes = []
+    const secondIncludes = []
+    const thirdIncludes = []
+
+    if (req.query.include) {
+        if (
+            req.query.include.Route &&
+            req.query.include.Route.status === "true"
+        ) {
+            includes.push({
+                model: db.Route,
+                required: true,
+                where: req.query.include.Route.where
+            })
+        }
+
+        if (
+            req.query.include.Time &&
+            req.query.include.Time.status === "true"
+        ) {
+            if (
+                req.query.include.Time.Trip &&
+                req.query.include.Time.Trip.status === "true"
+            ) {
+                if (
+                    req.query.include.Time.Trip.Calender &&
+                    req.query.include.Time.Trip.Calender.status === "true"
+                ) {
+                    thirdIncludes.push({
+                        model: db.Calender,
+                        required: true,
+                        where: req.query.include.Time.Trip.Calender.where
+                    })
+                }
+                if (
+                    req.query.include.Time.Trip.Operation &&
+                    req.query.include.Time.Trip.Operation.status === "true"
+                ) {
+                    thirdIncludes.push({
+                        model: db.Operation,
+                        required: false,
+                        where: req.query.include.Time.Trip.Operation.where,
+                        include: {
+                            model: db.Calender,
+                            required: true
+                        }
+                    })
+                }
+                if (
+                    req.query.include.Time.Trip.Time &&
+                    req.query.include.Time.Trip.Time.status === "true"
+                ) {
+                    thirdIncludes.push({
+                        model: db.Time,
+                        required: true,
+                        include: {
+                            model: db.Station,
+                            required: true
+                        }
+                    })
+                }
+                if (
+                    req.query.include.Time.Trip.tripClass &&
+                    req.query.include.Time.Trip.tripClass.status === "true"
+                ) {
+                    thirdIncludes.push({
+                        model: db.TripClass,
+                        required: true
+                    })
+                }
+
+                secondIncludes.push({
+                    model: db.Trip,
+                    required: true,
+                    where: req.query.include.Time.Trip.where,
+                    include: thirdIncludes
+                })
+            }
+
+            includes.push({
+                model: db.Time,
+                required: true,
+                where: req.query.include.Time.where,
+                include: secondIncludes
+            })
+        }
+
+        if (
+            req.query.include.Stop &&
+            req.query.include.Stop.status === "true"
+        ) {
+            includes.push({
+                model: db.Stop,
+                required: true,
+                where: req.query.include.Stop.where
+            })
+        }
+    }
+
+    db.Station.findAll({
+        order: orders,
+        include: includes,
+        where: req.query.where ? req.query.where : null
+    })
+        .then(result => {
+            res.json(result)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+})
+
 router.get("/", (req, res) => {
+    console.log(req.query.direction)
+    // 駅情報の取得
+
+    const params = {
+        direction: req.query.direction
+    }
     db.Station.findAll({
         order: [
-            [db.Station.associations.Route, "sortOrder", "ASC"],
-            ["sortOrder", "ASC"]
+            ["sortOrder", params.direction === "down" ? "ASC" : "DESC"],
+            [db.Station.associations.Times, "departureTime", "ASC"]
         ],
         include: [
             {
                 model: db.Route,
                 required: true
+            },
+            {
+                model: db.Time,
+                required: false,
+                include: {
+                    model: db.Trip,
+                    required: true,
+                    where: {
+                        tripDirectionId: 1 //上下線選択
+                    },
+                    include: {
+                        model: db.Calender,
+                        required: true,
+                        where: {
+                            calenderName: "土休日" //曜日選択
+                        }
+                    }
+                }
             },
             {
                 model: db.Stop,
@@ -459,11 +643,11 @@ router.get("/mock", (req, res) => {
 
     for (const num of data) {
         if (num.routeId === "本線") {
-            num.routeId = "db745f3f-f20c-46c4-a410-9435d7ae8a86"
+            num.routeId = "732f2e56-c7d0-44f7-b0e0-5a7cddecb37c"
         } else if (num.routeId === "いずみ野線") {
-            num.routeId = "7aac6609-9f7f-4991-bff6-34f8f462f03f"
+            num.routeId = "29fc1fb5-d5dd-4aeb-bee3-0ea6c837d5f7"
         } else if (num.routeId === "厚木線") {
-            num.routeId = "b3bce179-cd3b-49af-8ef9-15877048de91"
+            num.routeId = "b6ebb496-ce39-4520-898e-61db4a331b84"
         }
         db.Station.create(num, {
             include: [

@@ -1,0 +1,114 @@
+<p>
+  timetable-all-line works!
+  {{paginator.pageEvent.length}}
+</p>
+
+<mat-paginator [length]="paginator.length" [pageSize]="paginator.pageSize" [pageSizeOptions]="paginator.pageSizeOptions"
+  (page)="paginator.pageEvent = $event">
+</mat-paginator>
+
+<table style="border: 1px solid #888; border-collapse:collapse;">
+  <tr style="white-space: nowrap">
+    <th>列車番号</th>
+    <ng-container *ngFor="let trip of trips; let i = index">
+      <th class="main trip-column" *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize">{{trip.tripNumber}}</th>
+    </ng-container>
+
+  </tr>
+  <tr style="white-space: nowrap">
+    <th>種別</th>
+    <ng-container *ngFor="let trip of trips; let i = index">
+      <th class="main trip-column" *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize"
+        [style.color]="trip.TripClass.tripClassColor">{{trip.TripClass.tripClassName}}</th>
+    </ng-container>
+
+  </tr>
+  <tr>
+    <th>始発駅</th>
+    <ng-container *ngFor="let trip of trips; let i = index">
+      <th class="main trip-column" *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize">{{trip.Times[0].Stop.Station.stationName}}</th>
+    </ng-container>
+
+  </tr>
+  <tr style="border-bottom:2px solid #888;">
+    <th>終着駅</th>
+    <ng-container *ngFor="let trip of trips; let i = index">
+      <th class="main trip-column" *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize">{{trip.Times[trip.Times.length
+        - 1].Stop.Station.stationName}}</th>
+    </ng-container>
+
+  </tr>
+
+  <ng-container *ngFor="let station of stations; let m = index">
+    <tr style="white-space: nowrap" [style.border-top]="params.direction === 'up' && (station.stationName === '海老名' || station.stationName === '湘南台') ? '1px solid #888': 'none'"
+      [style.border-bottom]="params.direction === 'down' && (station.stationName === '海老名' || station.stationName === '湘南台') ? '1px solid #888': 'none'">
+      <td [attr.rowspan]="station.stationName === '二俣川' ? 2 : 1">{{station.stationName}}</td>
+      <ng-container *ngFor="let trip of trips; let i = index">
+        <td *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize"
+          class="dia main" [style.color]="trip.TripClass.tripClassColor" style="border-style:solid; border-color:#888; border-width: 0px 1px 0px 1px">
+          <ng-container *ngFor="let time of trip.Times">
+            <ng-container *ngIf="time.Stop.Station.stationName === station.stationName">
+              <ng-container *ngIf="time.arrivalTime">
+                {{convertTime(time.arrivalTime)}}
+              </ng-container>
+              <ng-container *ngIf="!time.arrivalTime && station.stationName !== '二俣川'">
+                {{convertTime(time.departureTime)}}
+              </ng-container>
+              <ng-container *ngIf="!time.arrivalTime && station.stationName === '二俣川'">
+                ‥
+              </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="time.Stop.Station.stationName !== station.stationName">
+              <ng-container *ngIf="time === trip.Times[0]">
+                <ng-container *ngIf="stations[m - 1] && trip.Times[trip.Times.length
+                - 1].Stop.Station.stationName !== '二俣川' && trip.Times[trip.Times.length
+                  - 1].Stop.Station.stationName === stations[m - 1].stationName;then last; else normal"></ng-container>
+                <ng-template #last>
+                  =
+                </ng-template>
+                <ng-template #normal>
+                  {{classChecker(trip.TripClass.tripClassName, trip.Times[0].Stop.Station.stationName,
+                  trip.Times[trip.Times.length - 1].Stop.Station.stationName, station.sortOrder)}}
+                </ng-template>
+
+              </ng-container>
+
+            </ng-container>
+          </ng-container>
+        </td>
+      </ng-container>
+    </tr>
+    <ng-container *ngIf="station.stationName === '二俣川'">
+      <tr>
+
+        <ng-container *ngFor="let trip of trips; let i = index">
+          <td style="border-top:1px solid #888" *ngIf="paginator.pageEvent.pageIndex * paginator.pageEvent.pageSize <= i && i < (paginator.pageEvent.pageIndex + 1) * paginator.pageEvent.pageSize"
+            class="dia main trip-column" [style.color]="trip.TripClass.tripClassColor">
+            <ng-container *ngFor="let time of trip.Times">
+              <ng-container *ngIf="time.Stop.Station.stationName === station.stationName">
+
+                <ng-container *ngIf="time.departureTime">
+                  {{convertTime(time.departureTime)}}
+                </ng-container>
+                <ng-container *ngIf="!time.departureTime">
+                  =
+                </ng-container>
+
+
+              </ng-container>
+              <ng-container *ngIf="time.Stop.Station.stationName !== station.stationName">
+                <ng-container *ngIf="time === trip.Times[0]">
+                  {{classChecker(trip.TripClass.tripClassName, trip.Times[0].Stop.Station.stationName,
+                  trip.Times[trip.Times.length - 1].Stop.Station.stationName, station.sortOrder)}}
+                </ng-container>
+
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
+  </ng-container>
+
+</table>

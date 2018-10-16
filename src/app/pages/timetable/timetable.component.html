@@ -1,0 +1,13 @@
+<p>
+  timetable works!
+  <ng-container *ngFor="let station of stations">{{station.stationName}}</ng-container>
+</p>
+<ng-container [ngSwitch]="tableFlg">
+  <div *ngSwitchCase="false">
+    <app-timetable-all-line></app-timetable-all-line>
+  </div>
+  <div *ngSwitchCase="true">
+    <app-timetable-by-station></app-timetable-by-station>
+  </div>
+
+</ng-container>

@@ -10,11 +10,15 @@ module.exports = {
             tripId: {
                 type: Sequelize.UUID
             },
+            stationId: {
+                type: Sequelize.UUID
+            },
             stopId: {
                 type: Sequelize.UUID
             },
             stopSequence: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                unique: true
             },
             pickupType: {
                 type: Sequelize.INTEGER

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
         Service.belongsToMany(models.Route, { through: "LineSystem" })
         Service.hasMany(models.Trip, { foreignKey: "serviceId" })
+        Service.hasMany(models.Operation, { foreignKey: "serviceId" })
     }
     return Service
 }

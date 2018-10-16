@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     Calender.associate = function(models) {
         // associations can be defined here
         Calender.hasMany(models.Trip, { foreignKey: "calenderId" })
+        Calender.hasMany(models.Operation, { foreignKey: "calenderId" })
     }
     return Calender
 }

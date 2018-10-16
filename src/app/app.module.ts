@@ -21,12 +21,17 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TopComponent } from './pages/top/top.component';
+import { TimetableComponent } from './pages/timetable/timetable.component';
+import { TimetableAllLineComponent } from './pages/timetable/timetable-all-line.component';
+import { TimetableByStationComponent } from './pages/timetable/timetable-by-station.component';
 
 @Injectable()
 class UIErrorHandler extends ErrorHandler {
@@ -41,7 +46,13 @@ class UIErrorHandler extends ErrorHandler {
 }
 
 @NgModule({
-    declarations: [AppComponent, TopComponent],
+    declarations: [
+        AppComponent,
+        TopComponent,
+        TimetableComponent,
+        TimetableAllLineComponent,
+        TimetableByStationComponent
+    ],
     imports: [
         ErrorsModule,
         BrowserModule,
@@ -64,7 +75,9 @@ class UIErrorHandler extends ErrorHandler {
         FlexLayoutModule,
         MatSelectModule,
         MatInputModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         {
