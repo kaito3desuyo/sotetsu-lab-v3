@@ -1,10 +1,17 @@
 const express = require("express")
 const path = require("path")
 const http = require("http")
+const bodyParser = require("body-parser")
+const passport = require("passport")
 
 const api = require("./server/routes/index.js")
 
 const app = express()
+
+// ミドルウェア読み込み
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(passport.initialize())
+require("./server/middlewares/passport")(passport)
 
 // CORSを許可する
 app.use((req, res, next) => {

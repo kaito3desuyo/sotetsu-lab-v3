@@ -1,6 +1,16 @@
 {
-  "rulesDirectory": ["node_modules/codelyzer"],
+  "rulesDirectory": ["node_modules/codelyzer", "tslint-plugin-prettier"],
+  "extends": [
+    "tslint-config-prettier"
+  ],
   "rules": {
+    "prettier": [
+      true,
+      {
+        "singleQuote": true,
+        "semi": true
+      }
+    ],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,

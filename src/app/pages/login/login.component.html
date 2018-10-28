@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-title>管理画面ログイン</mat-card-title>
+  <mat-card-content>
+      <p>{{message}}</p>
+      <mat-list>
+        <mat-list-item>
+            <mat-form-field><input matInput placeholder="管理ID" [(ngModel)]="manageId"></mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-form-field><input matInput placeholder="管理パスワード" [(ngModel)]="managePassword"></mat-form-field>
+        </mat-list-item>
+      </mat-list>
+      <mat-list-item>
+          <button mat-button (click)="login()" *ngIf="!authService.isLoggedIn">ログイン</button>
+          <button mat-button (click) ="logout()" *ngIf="authService.isLoggedIn">ログアウト</button>
+      </mat-list-item>
+  </mat-card-content>
+  
+</mat-card>
+{{manageId}}
