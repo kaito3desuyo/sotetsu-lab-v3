@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./management.component.css']
 })
 export class ManagementComponent implements OnInit {
+  navLinks: [
+    {
+      label: string;
+      path: string;
+    }
+  ] = [
+    {
+      label: '車両',
+      path: './vehicle'
+    }
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

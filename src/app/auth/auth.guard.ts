@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     const url: string = state.url;
-    console.log('AuthGuard#canActivate called');
     return this.checkLogin(url);
   }
 

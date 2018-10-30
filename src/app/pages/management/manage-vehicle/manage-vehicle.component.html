@@ -1,3 +1,57 @@
-<p>
-  manage-vehicle works!
-</p>
+<table mat-table matSort [dataSource]="findData" matSortActive="id">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="vehicleNumber">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>車両番号</th>
+    <td mat-cell *matCellDef="let element">{{element.vehicleNumber}}</td>
+  </ng-container>
+  <ng-container matColumnDef="isScrapped">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>廃車？</th>
+    <td mat-cell *matCellDef="let element">{{element.isScrapped}}</td>
+  </ng-container>
+  <ng-container matColumnDef="scrappedDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>廃車日</th>
+    <td mat-cell *matCellDef="let element">{{element.scrappedDate}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<form #formCheck="ngForm">
+  <mat-card>
+    <mat-card-title>車両を追加する</mat-card-title>
+    <mat-card-content *ngFor="let data of sendData; let i = index">
+      <mat-card-subtitle>{{i + 1}}件目</mat-card-subtitle>
+      <section>
+        <mat-form-field>
+          <input matInput type="text" [name]="'vehicleNumber' + i" placeholder="車両番号" [(ngModel)]="data.vehicleNumber"
+            #validationVehicleNumber="ngModel" required>
+          <mat-error *ngIf="validationVehicleNumber.hasError('required')">
+            車両番号は<strong>必須です</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </section>
+      <section>
+        <mat-slide-toggle required [name]="'isScrapped' + i" [(ngModel)]="data.isScrapped">廃車されましたか？</mat-slide-toggle>
+      </section>
+      <section>
+        <mat-form-field>
+          <input matInput type="date" [name]="'scrappedDate' + i" placeholder="廃車日" [(ngModel)]="data.scrappedDate"
+            #validationScrappedDate="ngModel" required [disabled]="!data.isScrapped">
+          <mat-error *ngIf="validationScrappedDate.hasError('required')">
+            廃車された車両の場合、廃車日は<strong>必須です</strong>
+          </mat-error>
+        </mat-form-field>
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="add()">データの追加</button>
+      <button mat-button (click)="send()" [disabled]="formCheck.invalid">送信</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+{{findData}}

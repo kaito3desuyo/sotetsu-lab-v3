@@ -4,12 +4,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap, delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../classes/user';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private errorService: ErrorService) {}
 
   isLoggedIn = false;
   redirectUrl: string;
@@ -44,7 +45,7 @@ export class AuthService {
           };
         }),
         catchError(
-          this.handleError(
+          this.errorService.handleError(
             'login',
             'ログインできませんでした。\n管理IDか管理パスワードが間違っています。'
           )
@@ -54,13 +55,5 @@ export class AuthService {
 
   logout(): void {
     this.isLoggedIn = false;
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-
-      return of(result as T);
-    };
   }
 }

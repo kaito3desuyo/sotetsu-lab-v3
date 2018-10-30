@@ -10,6 +10,8 @@ const tripClasses = require("./tripclasses.js")
 const times = require("./times.js")
 const operations = require("./operations.js")
 const users = require("./users.js")
+const formations = require("./formations.js")
+const vehicles = require("./vehicles.js")
 
 router.use("/stations", stations)
 router.use("/routes", routes)
@@ -20,5 +22,7 @@ router.use("/trip-classes", tripClasses)
 router.use("/times", times)
 router.use("/operations", operations)
 router.use("/users", users)
+router.use("/formations", formations)
+router.use("/vehicles", vehicles)
 
 module.exports = router

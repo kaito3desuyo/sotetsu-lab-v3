@@ -8,7 +8,7 @@ import { ManageVehicleComponent } from 'src/app/pages/management/manage-vehicle/
 const routes: Routes = [
   {
     path: 'Management',
-    canActivate: [AuthGuard],
+    /*canActivate: [AuthGuard],*/
     children: [
       { path: '', component: ManagementComponent },
       { path: 'vehicle', component: ManageVehicleComponent }

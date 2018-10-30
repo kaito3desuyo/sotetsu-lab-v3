@@ -26,7 +26,11 @@ import {
   MatInputModule,
   MatSlideToggleModule,
   MatPaginatorModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatTabsModule,
+  MatDatepickerModule,
+  MatTableModule,
+  MatSortModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,8 +66,8 @@ class UIErrorHandler extends ErrorHandler {
     TimetableAllLineComponent,
     TimetableByStationComponent,
     ManagementComponent,
+    ManageVehicleComponent,
     LoginComponent,
-
     ManageVehicleComponent
   ],
   imports: [
@@ -92,7 +96,11 @@ class UIErrorHandler extends ErrorHandler {
     MatInputModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     {
